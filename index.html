@@ -22,13 +22,34 @@
       align-items: center;
       color: white;
 
-      /* ✅ SCROLL FIX */
       overflow-x: hidden;
       overflow-y: auto;
     }
 
     .hidden {
       display: none;
+    }
+
+    /* HEARTS LAYER (isolated, no shaking) */
+    #hearts-container {
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      overflow: hidden;
+      z-index: 1;
+    }
+
+    .heart {
+      position: absolute;
+      bottom: -40px;
+      font-size: 20px;
+      animation: floatUp linear infinite;
+      opacity: 0.8;
+    }
+
+    @keyframes floatUp {
+      from { transform: translateY(0); opacity: 1; }
+      to { transform: translateY(-110vh); opacity: 0; }
     }
 
     /* PASSWORD CARD */
@@ -94,7 +115,6 @@
       text-align: center;
     }
 
-    /* GIF BOX */
     .gif-box {
       width: 100%;
       max-width: 320px;
@@ -110,7 +130,6 @@
       line-height: 1.6;
     }
 
-    /* PHOTO */
     .right img {
       width: 100%;
       max-width: 340px;
@@ -120,21 +139,7 @@
       box-shadow: 0 18px 45px rgba(0,0,0,0.4);
     }
 
-    /* FLOATING HEARTS */
-    .heart {
-      position: absolute;
-      bottom: -20px;
-      font-size: 20px;
-      animation: floatUp linear infinite;
-      opacity: 0.8;
-    }
-
-    @keyframes floatUp {
-      from { transform: translateY(0); opacity: 1; }
-      to { transform: translateY(-110vh); opacity: 0; }
-    }
-
-    /* MOBILE FIX */
+    /* MOBILE */
     @media (max-width: 768px) {
       body {
         align-items: flex-start;
@@ -159,6 +164,9 @@
 </head>
 <body>
 
+  <!-- HEARTS -->
+  <div id="hearts-container"></div>
+
   <!-- PASSWORD SCREEN -->
   <div class="card" id="lockScreen">
     <h2>🔐 Secret Page</h2>
@@ -167,7 +175,6 @@
     <input type="password" id="password" placeholder="Enter password">
     <button onclick="unlock()">Unlock ❤️</button>
 
-    <!-- Hint button -->
     <div style="margin-top: 12px;">
       <button id="hintBtn" onclick="showHint()"
         style="background: transparent; border: 1px solid white;">
@@ -175,7 +182,6 @@
       </button>
     </div>
 
-    <!-- Hint text -->
     <p id="hintText" style="
       margin-top: 12px;
       font-size: 13px;
@@ -183,7 +189,6 @@
       transition: opacity 0.5s ease;
     "></p>
 
-    <!-- Wrong password GIF -->
     <div id="wrongGif" class="hidden" style="margin-top: 15px;">
       <div class="tenor-gif-embed"
         data-postid="10172061471236238941"
@@ -196,8 +201,6 @@
 
   <!-- MAIN CONTENT -->
   <div class="split hidden" id="content" style="display:none;">
-
-    <!-- LEFT -->
     <div class="left">
       <div class="gif-box">
         <div class="tenor-gif-embed"
@@ -222,11 +225,9 @@
       </div>
     </div>
 
-    <!-- RIGHT -->
     <div class="right">
       <img src="CJUM0357.JPG" alt="Her Photo">
     </div>
-
   </div>
 
   <script>
@@ -269,6 +270,20 @@
 
       hint.style.opacity = "1";
     }
+
+    function createHeart() {
+      const heart = document.createElement("div");
+      heart.className = "heart";
+      heart.innerHTML = "💖";
+      heart.style.left = Math.random() * 100 + "vw";
+      heart.style.animationDuration = (4 + Math.random() * 3) + "s";
+      document.getElementById("hearts-container").appendChild(heart);
+      setTimeout(() => heart.remove(), 7000);
+    }
+
+    // ✅ HEARTS START HERE
+    const heartInterval = window.innerWidth < 768 ? 700 : 450;
+    setInterval(createHeart, heartInterval);
   </script>
 
 </body>
