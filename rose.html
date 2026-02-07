@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>For You ❤️</title>
+
+  <!-- Tenor GIF script -->
+  <script async src="https://tenor.com/embed.js"></script>
+
+  <style>
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      background: linear-gradient(135deg, #ff8fab, #ffb3c6);
+      font-family: 'Segoe UI', sans-serif;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      color: white;
+
+      /* ✅ SCROLL FIX */
+      overflow-x: hidden;
+      overflow-y: auto;
+    }
+
+    .hidden {
+      display: none;
+    }
+
+    /* PASSWORD CARD */
+    .card {
+      background: rgba(255,255,255,0.18);
+      padding: 32px;
+      border-radius: 24px;
+      text-align: center;
+      width: 330px;
+      backdrop-filter: blur(14px);
+      box-shadow: 0 18px 45px rgba(0,0,0,0.35);
+      z-index: 2;
+    }
+
+    input {
+      width: 100%;
+      padding: 12px;
+      border-radius: 12px;
+      border: none;
+      margin-top: 14px;
+      font-size: 14px;
+      outline: none;
+    }
+
+    button {
+      margin-top: 18px;
+      padding: 12px 26px;
+      border: none;
+      border-radius: 24px;
+      background: #ff4d6d;
+      color: white;
+      font-size: 14px;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+
+    button:hover {
+      transform: scale(1.06);
+      background: #ff2f5d;
+    }
+
+    /* MAIN SPLIT */
+    .split {
+      display: flex;
+      gap: 40px;
+      background: rgba(255,255,255,0.18);
+      padding: 36px;
+      border-radius: 30px;
+      backdrop-filter: blur(14px);
+      box-shadow: 0 20px 50px rgba(0,0,0,0.35);
+      max-width: 980px;
+      width: 92%;
+      align-items: center;
+      z-index: 2;
+    }
+
+    .left, .right {
+      width: 50%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+    }
+
+    /* GIF BOX */
+    .gif-box {
+      width: 100%;
+      max-width: 320px;
+      background: white;
+      border-radius: 22px;
+      padding: 14px;
+      box-shadow: 0 15px 35px rgba(0,0,0,0.25);
+      margin-bottom: 18px;
+    }
+
+    .message {
+      font-size: 16px;
+      line-height: 1.6;
+    }
+
+    /* PHOTO */
+    .right img {
+      width: 100%;
+      max-width: 340px;
+      height: 420px;
+      object-fit: cover;
+      border-radius: 24px;
+      box-shadow: 0 18px 45px rgba(0,0,0,0.4);
+    }
+
+    /* FLOATING HEARTS */
+    .heart {
+      position: absolute;
+      bottom: -20px;
+      font-size: 20px;
+      animation: floatUp linear infinite;
+      opacity: 0.8;
+    }
+
+    @keyframes floatUp {
+      from { transform: translateY(0); opacity: 1; }
+      to { transform: translateY(-110vh); opacity: 0; }
+    }
+
+    /* MOBILE FIX */
+    @media (max-width: 768px) {
+      body {
+        align-items: flex-start;
+        padding: 20px 0;
+      }
+
+      .split {
+        flex-direction: column;
+        gap: 28px;
+      }
+
+      .left, .right {
+        width: 100%;
+      }
+
+      .right img {
+        height: auto;
+        max-width: 100%;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- PASSWORD SCREEN -->
+  <div class="card" id="lockScreen">
+    <h2>🔐 Secret Page</h2>
+    <p>Only for you Mehak</p>
+
+    <input type="password" id="password" placeholder="Enter password">
+    <button onclick="unlock()">Unlock ❤️</button>
+
+    <!-- Hint button -->
+    <div style="margin-top: 12px;">
+      <button id="hintBtn" onclick="showHint()"
+        style="background: transparent; border: 1px solid white;">
+        Need a hint? 🤍
+      </button>
+    </div>
+
+    <!-- Hint text -->
+    <p id="hintText" style="
+      margin-top: 12px;
+      font-size: 13px;
+      opacity: 0;
+      transition: opacity 0.5s ease;
+    "></p>
+
+    <!-- Wrong password GIF -->
+    <div id="wrongGif" class="hidden" style="margin-top: 15px;">
+      <div class="tenor-gif-embed"
+        data-postid="10172061471236238941"
+        data-share-method="host"
+        data-aspect-ratio="1.07"
+        data-width="100%">
+      </div>
+    </div>
+  </div>
+
+  <!-- MAIN CONTENT -->
+  <div class="split hidden" id="content" style="display:none;">
+
+    <!-- LEFT -->
+    <div class="left">
+      <div class="gif-box">
+        <div class="tenor-gif-embed"
+          data-postid="15115009436133024653"
+          data-share-method="host"
+          data-aspect-ratio="1.18"
+          data-width="100%">
+        </div>
+      </div>
+
+      <div class="message">
+        HI MEHAK!<br>
+        Thank you for always being with me,<br>
+        for putting up with me,<br>
+        understanding me,<br>
+        and still liking me… somehow 😌<br><br>
+
+        This rose is for you 🌹<br>
+        because that level of commitment deserves recognition<br><br>
+
+        I LIKE YOU SO MUCH 🩷💙
+      </div>
+    </div>
+
+    <!-- RIGHT -->
+    <div class="right">
+      <img src="CJUM0357.JPG" alt="Her Photo">
+    </div>
+
+  </div>
+
+  <script>
+    const correctPassword = "mehu";
+    let hintClicks = 0;
+
+    function unlock() {
+      const entered = document.getElementById("password").value;
+      const lock = document.getElementById("lockScreen");
+      const content = document.getElementById("content");
+      const wrongGif = document.getElementById("wrongGif");
+
+      if (entered === correctPassword) {
+        lock.style.display = "none";
+        content.style.display = "flex";
+        content.classList.remove("hidden");
+      } else {
+        wrongGif.classList.remove("hidden");
+        alert("Wrong password 💔 Try again");
+      }
+    }
+
+    function showHint() {
+      const hint = document.getElementById("hintText");
+      const btn = document.getElementById("hintBtn");
+      hintClicks++;
+
+      if (hintClicks === 1) {
+        hint.innerText = "Nahi dunga 😌";
+        btn.innerText = "click for asli hint 😅";
+      } else if (hintClicks === 2) {
+        hint.innerText = "hehehe nahi milegiii 😌";
+        btn.innerText = "chal lele click for riyal hint 😅";
+      } else {
+        hint.innerText = "🌸 It’s something that reminds you of us";
+        btn.innerText = "You got it BAGGO 🤍";
+        btn.disabled = true;
+        btn.style.opacity = "0.7";
+      }
+
+      hint.style.opacity = "1";
+    }
+  </script>
+
+</body>
+</html>
